@@ -1,0 +1,25 @@
+services:
+  reviewdb:
+    container_name: reviewdb
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: Bostan46289145!
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+    - published: 1433
+      target: 1433
+    restart: always
+  reviewgrpc:
+    build:
+      context: C:\Users\pouyan\Documents\Visual Studio 2019\project\reservationmicroservice\src\Services\Review
+      dockerfile: reviewGrpc/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: reviewgrpc
+    ports:
+    - target: 80
+    - target: 443
+    volumes:
+    - C:\Users\pouyan\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+version: '3.4'

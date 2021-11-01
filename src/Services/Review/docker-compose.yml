@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+
+  reviewdb:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+  reviewgrpc:
+    image: ${DOCKER_REGISTRY-}reviewgrpc
+    build:
+      context: .
+      dockerfile: reviewGrpc/Dockerfile
